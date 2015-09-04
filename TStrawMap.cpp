@@ -51,12 +51,21 @@ void TStrawMap::Draw(double startPointX, double startPointY){
 	
 	//float x_pos = 0.05 + radius;
 	//float y_pos = 0.05 + radius;
-	float x_pos = startPointX + radius;
-	float y_pos = startPointY + radius;
+	float x_pos = startPointX;
+	float y_pos = startPointY + 2*radius;
 
 
-	unsigned int straw_iter = 0;
-	for (unsigned int x = 0 ; x < cols ; x++){
+	//unsigned int straw_iter = 0;
+	for (unsigned int straw_iter = 0; straw_iter< raws*cols; straw_iter++){
+                        straws[straw_iter] -> SetX1(x_pos);
+                        straws[straw_iter] -> SetY1(y_pos);
+			x_pos = x_pos + radius;
+			straw_iter%2 != 0 ? y_pos = y_pos + Constanses::sqrt3*radius : y_pos = y_pos - Constanses::sqrt3*radius;
+			straws[straw_iter]->Draw();
+	}
+
+
+/*	for (unsigned int x = 0 ; x < cols ; x++){
 		for (unsigned int y =0 ; y < raws; y++){
 			//straws.push_back(new TStraw(x_pos,y_pos,radius));
 			straws[straw_iter] -> SetX1(x_pos);
@@ -67,10 +76,10 @@ void TStrawMap::Draw(double startPointX, double startPointY){
 			straw_iter++;
 		}
 		y_pos = y_pos + Constanses::sqrt3*radius;
-		x%2 == 0 ? x_pos = 0.05+2*radius : x_pos = 0.05+radius;
+		x%2 != 0 ? x_pos = 0.05+2*radius : x_pos = 0.05+radius;
 		//x_pos = 0.05 +radius;
 	}
-	
+*/	
 
 }
 
