@@ -1,7 +1,7 @@
 #include <vector>
 #include <TEllipse.h>
 #include "TStraw.cpp"
-#include <iostream>
+//#include <iostream>
 class TStraw;
 
 
@@ -22,7 +22,8 @@ public:
 	TStrawMap(unsigned int x, unsigned int y);
 	void Draw(double, double);
 	void MarkStraw(int);
-
+	void MarkStraw(int,int);
+	void Clear();
 
 };
 
@@ -36,7 +37,7 @@ TStrawMap::TStrawMap(unsigned int x, unsigned int y): raws(x), cols(y) {
                 for (unsigned int y =0 ; y < raws; y++){
                         straws.push_back(new TStraw(0,0,radius));
                 }
-	std::cout<<straws.size()<<std::endl;
+	//std::cout<<straws.size()<<std::endl;
 }
 }
 
@@ -83,6 +84,18 @@ void TStrawMap::Draw(double startPointX, double startPointY){
 
 }
 
+void TStrawMap::MarkStraw(int st_number, int color){
+	if(st_number <= straws.size())
+	straws[st_number]->Mark(color);	
+}
+
 void TStrawMap::MarkStraw(int st_number){
+	if(st_number <= straws.size())
 	straws[st_number]->Mark();	
+}
+
+void TStrawMap::Clear(){
+	for (std::vector<TStraw *>::iterator it = straws.begin() ; it != straws.end(); ++it)
+    	(*it)->Mark(0);	
+	//straws[st_number]->Mark();	
 }
